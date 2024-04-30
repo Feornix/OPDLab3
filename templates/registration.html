@@ -1,0 +1,19 @@
+{%extends 'index.html'%}
+
+{%block title%}
+Регистрация
+{%endblock%}
+
+{%block h%}
+Регистрация
+{%endblock%}
+
+{%block button1%}
+<input type = "submit" value = "Зарегистрироваться">
+{%endblock%}
+
+{%block button2%}
+<form action="{{ url_for('index') }}" target="_blank">
+    <input type = "submit" value = "Авторизация">
+</form>
+{%endblock%}

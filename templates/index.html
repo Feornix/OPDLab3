@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>{%block title%}Авторизация{%endblock%}</title>
+    </head>
+    <body>
+        <h1>{%block h%}Авторизация{%endblock%}</h1>
+        <form method = "post">
+            <p>Логин:</p>
+            <input type="text" name='login'>
+            <p>Пароль:</p>
+            <input type="text" name='password'>
+            <br>
+            <br>
+            {%block button1%}
+            <input type = "submit" value = "Войти">
+            {%endblock%}
+        </form>
+        {%block button2%}
+        <form action="{{ url_for('registration') }}" target="_blank">
+        <input type = "submit" value = "Регистрация">
+        </form>
+        {%endblock%}
+        <p>{{result}}</p>
+    </body>
+</html>
