@@ -13,12 +13,47 @@ def checkEmptyForms(login, password):
         return True
     return False
 
+def checkSpaces(login):
+    for i in range(0,len(login)):
+        if login[i] == " ":
+            return True
+    return False
+
+def checkNotEnglishLatters(login, password):
+    for i in login:
+        if not i.isascii():
+            return True
+    for j in password:
+        if not j.isascii():
+            return True
+    return False
+
+def checkSymbols(login):
+    for i in login:
+        if i == "&" or i == "=" or i == "+" or i == "<" or i == ">" or i=="," or i=="\'" or i=="@":
+            return True
+    return False
+
+
+
 def checkAuthorisation(lines, login, password):
     for i in range(0, len(lines), 2):
         if login + "\n" == lines[i]:
             if password + "\n" == lines[i + 1]:
                 return True
     return False
+
+def checkRegistration(login, password):
+    if checkEmptyForms(login, password):
+        return False
+    elif checkSpaces(login):
+        return False
+    elif checkNotEnglishLatters(login, password):
+        return False
+    elif checkSymbols(login):
+        return False
+    else:
+        return True
 
 @app.route('/')
 @app.route('/index')
@@ -53,8 +88,8 @@ def registration():
         file = open("data/data.txt", "r+")
         lines = file.readlines()
         trigger = userAlreadyExist(lines, login)
-        if checkEmptyForms(login, password):
-            output = "Все поля должны быть заполнены"
+        if checkRegistration(login, password)==False:
+            output = "Введён некорректный логин или пароль"
         elif trigger==False:
             file.write(login+"\n")
             file.write(password+"\n")
